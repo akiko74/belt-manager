@@ -13,9 +13,14 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
+  host: <%= ENV['RAILS_DATABASE_HOST'] %>
+  username: <%= ENV['RAILS_DATABASE_USERNAME'] %>
+  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>
+  socket: /tmp/mysql.sock
+
+#username: root
+#password:
+#host: localhost
 
 development:
   <<: *default
@@ -50,5 +55,5 @@ test:
 production:
   <<: *default
   database: belt_manager_production
-  username: belt_manager
-  password: <%= ENV['BELT_MANAGER_DATABASE_PASSWORD'] %>
+#  username: belt_manager
+#  password: <%= ENV['BELT_MANAGER_DATABASE_PASSWORD'] %>
