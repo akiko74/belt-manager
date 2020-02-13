@@ -10,8 +10,13 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.name
-      user.email = auth.info.email
+      user.email = User.dummy_email(auth)
       user.password = Devise.friendly_token[0, 20] # ランダムなパスワードを作成
     end
+  end
+
+  private
+  def self.dummy_email(auth)
+   "#{auth.uid}-#{auth.provider}@dqx.belt-manager.jp"
   end
 end
