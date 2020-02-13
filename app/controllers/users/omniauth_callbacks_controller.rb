@@ -7,6 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
 
   def twitter
+  #  raise request.env['omniauth.auth'].to_yaml　<-Twitter認証の結果を表示する
   # You need to implement the method below in your model (e.g. app/models/user.rb)
   @user = User.from_omniauth(request.env["omniauth.auth"])
 
@@ -16,7 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url
-    end  
+    end
   end
 
   # More info at:
